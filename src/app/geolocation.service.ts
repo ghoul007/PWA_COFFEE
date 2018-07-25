@@ -8,12 +8,12 @@ export class GeolocationService {
 
   constructor(private http: HttpClient) { }
 
-  requestLocation() {
+  requestLocation(callback) {
     navigator.geolocation.getCurrentPosition(position => {
-      // callback(position.coords);
+      callback(position.coords);
     },
       error => {
-        // callback(null);
+        callback(null);
 
       }
     )

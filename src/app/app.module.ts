@@ -13,6 +13,7 @@ import 'hammerjs';
 import { ListComponent } from './list/list.component';
 import { CoffeeComponent } from './coffee/coffee.component';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from "@angular/forms";
 
 const routes: Routes = [
   { path: '', component: ListComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     MatButtonModule, MatIconModule, MatInputModule, MatSelectModule, MatSliderModule,
     MatToolbarModule, MatCardModule, MatSlideToggleModule
   ],
