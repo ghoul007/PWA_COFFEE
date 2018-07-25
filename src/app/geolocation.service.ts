@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from 'selenium-webdriver/http';
-
+import { HttpClient } from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
@@ -27,10 +26,10 @@ export class GeolocationService {
       query = `${location.address}, ${location.city}`
     }
 
-    if(/iPad|iPhone|iPod/.test(navigator.userAgent)){
-     return 'https://maps.apple.com/?q=${query}' 
-    }else{
-      return 'https://maps.google.com/?q=${query}' 
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      return 'https://maps.apple.com/?q=${query}'
+    } else {
+      return 'https://maps.google.com/?q=${query}'
 
     }
     // <a href="https://maps.google.com/?q=Eiffel+Tower" >
