@@ -1,4 +1,7 @@
-class Coffee {
+import { TastingRating } from "./TastingRating";
+import { PlaceLocation } from "./PlaceLocation";
+
+export class Coffee {
 
     type: string;
     rating: number;
