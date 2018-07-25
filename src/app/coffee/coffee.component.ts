@@ -25,6 +25,15 @@ export class CoffeeComponent implements OnInit {
   }
 
 
+  cancel() {
+
+  }
+
+  save() {
+
+  }
+
+
   ngOnInit() {
     this.coffee = new Coffee()
 
