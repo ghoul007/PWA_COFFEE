@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { GeolocationService } from './geolocation.service';
 import { DataService } from './data.service';
@@ -36,7 +36,7 @@ const routes: Routes = [
     MatButtonModule, MatIconModule, MatInputModule, MatSelectModule, MatSliderModule,
     MatToolbarModule, MatCardModule, MatSlideToggleModule
   ],
-  providers: [GeolocationService, DataService],
+  providers: [GeolocationService, DataService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

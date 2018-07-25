@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Routes, Router } from '@angular/router'
 import { Coffee } from '../logic/Coffee';
 import { GeolocationService } from '../geolocation.service';
 import { TastingRating } from '../logic/TastingRating';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-coffee',
@@ -10,10 +11,16 @@ import { TastingRating } from '../logic/TastingRating';
   styleUrls: ['./coffee.component.css']
 })
 export class CoffeeComponent implements OnInit {
+  tastingEnabled: boolean = false;
   coffee: Coffee;
   types = ['Expresso', 'Americano', 'Cappucino']
-  routerSubscription: any;
-  constructor(private route: ActivatedRoute, private geolocationService: GeolocationService) { }
+  routingSubscription: any;
+  constructor(
+    private route: ActivatedRoute,
+    private geolocationService: GeolocationService,
+    private data: DataService,
+    private router: Router
+  ) { }
 
 
   tastingRatingChaned(checked: Boolean) {
@@ -26,22 +33,34 @@ export class CoffeeComponent implements OnInit {
 
 
   cancel() {
-
+    this.router.navigate(["/"]);
   }
 
   save() {
-
+    this.data.save(this.coffee, result => {
+      if (result) {
+        this.router.navigate(["/"]);
+      }
+    });
   }
 
 
   ngOnInit() {
     this.coffee = new Coffee()
 
-    this.routerSubscription = this.route.params.subscribe(params => {
-      console.log(params['id']);
-
-    })
-
+  
+    this.routingSubscription = 
+        this.route.params.subscribe(params => {
+            console.log(params["id"]);
+            if (params["id"]) {
+              this.data.get(params["id"], response => {
+                this.coffee = response;
+                if (this.coffee.tastingRating) {
+                  this.tastingEnabled = true;
+                }
+              });
+            }
+        });
 
 
     this.geolocationService.requestLocation(location => {
@@ -53,7 +72,7 @@ export class CoffeeComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe()
+    this.routingSubscription.unsubscribe()
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
 
