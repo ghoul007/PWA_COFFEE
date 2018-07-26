@@ -20,5 +20,19 @@
         "/assets/**"
       ]
     }
-  }]
+  }],
+  "dataGroupd": [
+    {
+      "name": "user-api",
+      "url": [
+        "http://localhost:8081/coffees"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "1hr",
+        "timeout": "5s"
+      }
+    }
+  ]
 }

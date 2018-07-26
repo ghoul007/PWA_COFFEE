@@ -13,9 +13,21 @@ export class AppComponent {
   }
 
 
- 
+  updateNetworkStatusUI() {
+    if (navigator.onLine) {
+      // You might be online
+      (document.querySelector("body") as any).style = "";
+    } else {
+      // 100% Sure you are offline
+      (document.querySelector("body") as any).style = "filter: grayscale(1)";
+    }
+  }
 
   ngOnInit() {
+    this.updateNetworkStatusUI();
+    window.addEventListener("online", this.updateNetworkStatusUI);
+    window.addEventListener("offline", this.updateNetworkStatusUI);
+ 
     if ((navigator as any).standalone==false) {
       // This is an iOS device and we are in the browser
       this.snackBar.open("You can add this PWA to the Home Screen", 
@@ -45,5 +57,5 @@ export class AppComponent {
     }
   }
 
-  
+
 }
