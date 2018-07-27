@@ -21,16 +21,16 @@
       ]
     }
   }],
-  "dataGroupd": [
+  "dataGroups": [
     {
-      "name": "user-api",
-      "url": [
-        "http://localhost:8081/coffees"
+      "name": "coffee-api",
+      "urls": [
+        "http://localhost:3000/coffees"
       ],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 20,
-        "maxAge": "1hr",
+        "maxAge": "1h",
         "timeout": "5s"
       }
     }

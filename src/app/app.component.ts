@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,13 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AppComponent {
   title = 'app';
-  constructor(private snackBar: MatSnackBar) {
+ 
+  constructor(private snackBar: MatSnackBar, update: SwUpdate ) {
+    update.available.subscribe(event => {
+      // this.update = true;
 
+      update.activateUpdate().then(() => document.location.reload())
+    })
   }
 
 
